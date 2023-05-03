@@ -2,7 +2,7 @@ import openai
 
 openai.api_key = ""
 
-person_desc = """
+story_desc = """
 You are a storyteller, telling your chat partner an interactive story.
 
 The story takes place in a mysterious castle. 
@@ -19,7 +19,7 @@ The person win, if they kill the dragon with the sword.
 The person has 10 health points. If they have 0 health points, they die.
 """
 
-reccurrent_system_prompt = f"This is the setting of interest: {person_desc}."
+recurrent_system_prompt = f"This is the setting of interest: {story_desc}."
 
 intention_analyis_system_prompt = """
 From the above conversation, what does the storyteller think happens to the person?
@@ -53,14 +53,14 @@ while running is True:
     user_input = input("you: ")
 
     chat_messages.append({"role": "user", "content": user_input})
-    chat_messages.append({"role": "system", "content": reccurrent_system_prompt})
+    chat_messages.append({"role": "system", "content": recurrent_system_prompt})
     
 
     chat_history = "\n".join([message2string(m) for m in chat_messages if m['role'] != "system"])
 
     messages = []
     
-    messages.append({"role": "system", "content": reccurrent_system_prompt + "\n" + "Also, this chat history is given: \n" + chat_history + "\nPerson: "})
+    messages.append({"role": "system", "content": recurrent_system_prompt + "\n" + "Also, this chat history is given: \n" + chat_history + "\nPerson: "})
     messages.append({"role": "user", "content": current_prompt})
     
 
